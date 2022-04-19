@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import styles from "../styles/Home.module.css";
+import Footer from "../components/Footer";
 
 const AblyNewsComponent = dynamic(
   () => import("../components/AblyNewsComponent"),
@@ -18,30 +18,17 @@ export default function Home(props) {
       </Head>
 
       <main className={styles.main}>
-        <h1>Realtime News 📰</h1>
+        <img
+          src="https://static.ably.dev/motif-red.svg?lorem-ipsum"
+          className={styles.ablylogo}
+          alt=""
+        />
+        <h1>Realtime News</h1>
+
         <AblyNewsComponent apiKey={props.ablyApiKey} />
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-            {"  "}
-            and
-            <Image
-              src="/ably-logo.svg"
-              alt="Ably Logo"
-              width={72}
-              height={20}
-            />
-          </span>
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }

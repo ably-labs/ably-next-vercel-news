@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { configureAbly, useChannel, usePresence } from "@ably-labs/react-hooks";
-import styles from "../styles/AblyNewsComponent.module.css";
+import styles from "../styles/Home.module.css";
 import {
   uniqueNamesGenerator,
   adjectives,
@@ -74,7 +74,7 @@ const AblyNewsComponent = (props) => {
     if (event.charCode !== 13 || headlineTextIsEmpty) {
       return;
     }
-    sendNewHeadlineMessage(messageText);
+    sendNewHeadlineMessage(headlineText);
     event.preventDefault();
   };
 
@@ -102,7 +102,7 @@ const AblyNewsComponent = (props) => {
           onChange={(event) => setHeadlineText(event.target.value)}
           onKeyPress={handleKeyPress}
           className={styles.inputbox}
-        ></input>
+        />
         <button
           type="submit"
           className={styles.button}
