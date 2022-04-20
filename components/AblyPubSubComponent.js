@@ -3,7 +3,7 @@ import { useChannel } from "@ably-labs/react-hooks";
 import styles from "../styles/Home.module.css";
 import date from "date-and-time";
 
-const AblyPubSub = () => {
+const AblyPubSubComponent = () => {
   let inputBox = null;
   let messageEnd = null;
 
@@ -87,4 +87,4 @@ const AblyPubSub = () => {
   );
 };
 
-export default AblyPubSub;
+export default AblyPubSubComponent;

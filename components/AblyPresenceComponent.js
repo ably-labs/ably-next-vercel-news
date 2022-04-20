@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { usePresence } from "@ably-labs/react-hooks";
 import styles from "../styles/Home.module.css";
 
-const AblyPresence = (props) => {
+const AblyPresenceComponent = (props) => {
   const [presenceData] = usePresence("news-list");
 
   const presenceList = presenceData.map((member, index) => {
@@ -18,4 +18,4 @@ const AblyPresence = (props) => {
   return <div>{presenceList}</div>;
 };
 
-export default AblyPresence;
+export default AblyPresenceComponent;
