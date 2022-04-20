@@ -10,7 +10,7 @@ const clientId = generateRandomName();
 const AblyNewsComponent = (props) => {
   configureAbly({ key: props.apiKey, clientId: clientId });
   return (
-    <div className={styles.chatHolder}>
+    <div>
       <h3>Participants</h3>
       <AblyPresenceComponent clientId={clientId} />
       <h3>Headlines</h3>
