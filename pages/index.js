@@ -1,5 +1,6 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
 
@@ -18,11 +19,12 @@ export default function Home(props) {
       </Head>
 
       <main className={styles.main}>
-        <img
+        <Image
+          alt="ably logo"
           src="https://static.ably.dev/motif-red.svg?lorem-ipsum"
-          className={styles.ablylogo}
-          alt=""
-        />
+          width="160px"
+          height="100%"
+        ></Image>
         <h1>Realtime News</h1>
 
         <AblyNewsComponent apiKey={props.ablyApiKey} />
