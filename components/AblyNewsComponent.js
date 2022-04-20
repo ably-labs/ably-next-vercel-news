@@ -1,6 +1,5 @@
 import React from "react";
 import { configureAbly } from "@ably-labs/react-hooks";
-import styles from "../styles/Home.module.css";
 import { generateRandomName } from "../lib/randomNames";
 import AblyPubSubComponent from "./AblyPubSubComponent";
 import AblyPresenceComponent from "./AblyPresenceComponent";
