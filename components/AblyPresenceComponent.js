@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { usePresence } from "@ably-labs/react-hooks";
 import styles from "../styles/Home.module.css";
 
