@@ -1,21 +1,12 @@
 import React, { useState } from "react";
 import { configureAbly, useChannel, usePresence } from "@ably-labs/react-hooks";
 import styles from "../styles/Home.module.css";
-import {
-  uniqueNamesGenerator,
-  adjectives,
-  colors,
-  animals,
-} from "unique-names-generator";
+import { generateRandomName } from "../lib/randomNames";
+
 import date from "date-and-time";
 
-const randomName = uniqueNamesGenerator({
-  dictionaries: [adjectives, animals, colors],
-  length: 2,
-});
-
-const AblyNewsComponent = (props) => {
-  configureAbly({ key: props.apiKey, clientId: randomName });
+const AblyHeadlines = (props) => {
+  configureAbly({ key: props.apiKey, clientId: generateRandomName() });
   let inputBox = null;
   let messageEnd = null;
 
@@ -115,4 +106,4 @@ const AblyNewsComponent = (props) => {
   );
 };
 
-export default AblyNewsComponent;
+export default AblyHeadlines;
