@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../styles/Footer.module.css";
 
-export default function () {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <span>Powered by</span>
@@ -10,4 +10,5 @@ export default function () {
       <Image src="/ably-logo.svg" alt="Ably Logo" width={72} height={20} />
     </footer>
   );
-}
+};
+export default Footer;
