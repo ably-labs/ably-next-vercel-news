@@ -4,6 +4,8 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
 
+/* By default, NextJS renders everything server-side during the build process. We 
+need to tell it not to do that here so that our components can connect to Ably's APIs */
 const AblyNewsComponent = dynamic(
   () => import("../components/AblyNewsComponent"),
   { ssr: false }

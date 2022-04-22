@@ -2,10 +2,14 @@ import React from "react";
 import { usePresence } from "@ably-labs/react-hooks";
 import styles from "../styles/Home.module.css";
 
+/* Retrieves the Presence set from the "news-list" channel and lists
+the members using their client Id */
 const AblyPresenceComponent = (props) => {
   const [presenceData] = usePresence("news-list");
 
   const presenceList = presenceData.map((member, index) => {
+    /* Is this member of the Presence set the current user? If so,
+    mark it as "(me)" */
     const isItMe = member.clientId === props.clientId ? "(me)" : "";
     return (
       <li key={index}>

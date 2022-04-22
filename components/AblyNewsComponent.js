@@ -6,6 +6,8 @@ import AblyPresenceComponent from "./AblyPresenceComponent";
 
 const clientId = generateRandomName();
 
+/* Parent component that configures an instance of the Ably client
+and makes it available to the child components */
 const AblyNewsComponent = (props) => {
   configureAbly({ key: props.apiKey, clientId: clientId });
   return (

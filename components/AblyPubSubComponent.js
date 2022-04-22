@@ -3,6 +3,9 @@ import { useChannel } from "@ably-labs/react-hooks";
 import styles from "../styles/Home.module.css";
 import date from "date-and-time";
 
+/* Subscribes to headline messages from the "news-list" channel
+and provides a form to enter new headlines which it publishes to 
+the same channel */
 const AblyPubSubComponent = () => {
   let inputBox = null;
   let messageEnd = null;
@@ -11,10 +14,13 @@ const AblyPubSubComponent = () => {
   const [headlines, updateHeadlines] = useState([]);
   const headlineTextIsEmpty = headlineText.trim().length === 0;
 
+  /* Set the `rewind` parameter to retrieve up to ten historical 
+  messages from the channel, if available */
   const [channel, ably] = useChannel("[?rewind=10]news-list", (message) => {
     updateHeadlines((prev) => [...prev, message]);
   });
 
+  /* Process each message to retrieve the timestamp and author (client Id) */
   const headlinePreviews = headlines.map((headline, index) => {
     const timestamp = new Date(headline.timestamp);
     const formattedDate = "";
