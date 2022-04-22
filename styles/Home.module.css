@@ -8,9 +8,31 @@
   align-items: center;
 }
 
+.inputbox,
+.submitbutton {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size:larger;
+  border: 2px solid red;
+  border-radius: 4px;
+}
+
 .inputbox {
-  margin-top: 2em;
   width: 500px;
+  outline: none;
+  margin: 8px 0;
+
+}
+
+.submitbutton {
+  margin-left: 0.5em;
+  background-color: red;
+  color: white
+}
+
+.submitbutton:hover {
+  background-color: white;
+  color: red;
 }
 
 .timestamp {

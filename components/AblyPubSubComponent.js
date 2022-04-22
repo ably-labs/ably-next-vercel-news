@@ -83,7 +83,7 @@ const AblyPubSubComponent = () => {
         />
         <button
           type="submit"
-          className={styles.button}
+          className={styles.submitbutton}
           disabled={headlineTextIsEmpty}
         >
           Submit
