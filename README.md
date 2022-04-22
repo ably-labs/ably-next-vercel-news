@@ -10,7 +10,7 @@ It demonstrates use of:
 
 You can test it out by visiting the [Vercel deployment](https://ably-next-vercel-news.vercel.app/) in multiple pages.
 
-To run it locally, fork this repo and add an `.env.local` file containing your Ably API key:
+To run it locally, fork this repo. Copy `example.env` to `.env` and fill in your Ably API key:
 
 ```
 ABLY_API_KEY=your.api-key:goes-here
