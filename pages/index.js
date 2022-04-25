@@ -6,8 +6,8 @@ import Footer from "../components/Footer";
 
 /* By default, NextJS renders everything server-side during the build process. We 
 need to tell it not to do that here so that our components can connect to Ably's APIs */
-const AblyNewsComponent = dynamic(
-  () => import("../components/AblyNewsComponent"),
+const AblyNews = dynamic(
+  () => import("../components/AblyNews"),
   { ssr: false }
 );
 
@@ -29,7 +29,7 @@ export default function Home(props) {
         ></Image>
         <h1>Realtime News</h1>
 
-        <AblyNewsComponent apiKey={props.ablyApiKey} />
+        <AblyNews apiKey={props.ablyApiKey} />
       </main>
 
       <Footer />

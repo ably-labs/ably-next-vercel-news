@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 
 /* Retrieves the Presence set from the "news-list" channel and lists
 the members using their client Id */
-const AblyPresenceComponent = (props) => {
+const AblyPresence = (props) => {
   const [presenceData] = usePresence("news-list");
 
   const presenceList = presenceData.map((member, index) => {
@@ -22,4 +22,4 @@ const AblyPresenceComponent = (props) => {
   return <div>{presenceList}</div>;
 };
 
-export default AblyPresenceComponent;
+export default AblyPresence;

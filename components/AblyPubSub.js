@@ -6,7 +6,7 @@ import date from "date-and-time";
 /* Subscribes to headline messages from the "news-list" channel
 and provides a form to enter new headlines which it publishes to 
 the same channel */
-const AblyPubSubComponent = () => {
+const AblyPubSub = () => {
   let inputBox = null;
   let messageEnd = null;
 
@@ -93,4 +93,4 @@ const AblyPubSubComponent = () => {
   );
 };
 
-export default AblyPubSubComponent;
+export default AblyPubSub;
