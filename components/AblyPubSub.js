@@ -42,7 +42,7 @@ const AblyPubSub = () => {
   });
 
   const sendNewHeadlineMessage = (headlineText) => {
-    channel.publish({ name: "news-list", data: headlineText });
+    channel.publish({ data: headlineText });
     setHeadlineText("");
     inputBox.focus();
   };
