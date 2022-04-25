@@ -20,22 +20,26 @@ const AblyPubSub = () => {
     updateHeadlines((prev) => [...prev, message]);
   });
 
+  const formatDate = (timestamp) => {
+    const dateToFormat = new Date(timestamp);
+    const formattedDate = "";
+    if (dateToFormat.getDate() === new Date().getDate()) {
+      formattedDate = `Today ${date.format(dateToFormat, "HH:mm:ss")}`;
+    } else {
+      formattedDate = date.format(dateToFormat, "ddd HH:mm:ss");
+    }
+    return formattedDate
+  }
+
   /* Process each message to retrieve the timestamp and author (client Id) */
   const headlinePreviews = headlines.map((headline, index) => {
-    const timestamp = new Date(headline.timestamp);
-    const formattedDate = "";
-    if (timestamp.getDate() === new Date().getDate()) {
-      formattedDate = `Today ${date.format(timestamp, "HH:mm:ss")}`;
-    } else {
-      formattedDate = date.format(timestamp, "ddd HH:mm:ss");
-    }
     const author =
       headline.clientId === ably.auth.clientId ? "(me)" : headline.clientId;
     return (
       <li key={index}>
         {headline.data}
         {"     "}
-        <span className={styles.timestamp}>{formattedDate}</span>{" "}
+        <span className={styles.timestamp}>{formatDate(headline.timestamp)}</span>{" "}
         <span className={styles.author}>{author}</span>
       </li>
     );
