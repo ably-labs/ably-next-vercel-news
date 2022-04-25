@@ -32,18 +32,23 @@ const AblyPubSub = () => {
   }
 
   /* Process each message to retrieve the timestamp and author (client Id) */
-  const headlinePreviews = headlines.map((headline, index) => {
-    const author =
-      headline.clientId === ably.auth.clientId ? "(me)" : headline.clientId;
-    return (
-      <li key={index}>
-        {headline.data}
-        {"     "}
-        <span className={styles.timestamp}>{formatDate(headline.timestamp)}</span>{" "}
-        <span className={styles.author}>{author}</span>
-      </li>
-    );
-  });
+  const HeadlinePreviews = ({items}) => {
+    const previews = items.map((headline, index) => {
+      console.log(headline)
+      const author =
+        headline.clientId === ably.auth.clientId ? "(me)" : headline.clientId;
+      return (
+        <li key={index}>
+          {headline.data}
+          {"     "}
+          <span className={styles.timestamp}>{formatDate(headline.timestamp)}</span>{" "}
+          <span className={styles.author}>{author}</span>
+        </li>
+      );
+    });
+
+    return <ul>{previews}</ul>;
+  };
 
   const sendNewHeadlineMessage = async (headlineText) => {
     /* submit news to the server to verify and then publish */
@@ -74,7 +79,9 @@ const AblyPubSub = () => {
 
   return (
     <div>
-      <div>{headlinePreviews}</div>
+      <div>
+        <HeadlinePreviews items={headlines} />
+      </div>
 
       <div
         ref={(element) => {
