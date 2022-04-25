@@ -41,8 +41,16 @@ const AblyPubSub = () => {
     );
   });
 
-  const sendNewHeadlineMessage = (headlineText) => {
-    channel.publish({ data: headlineText });
+  const sendNewHeadlineMessage = async (headlineText) => {
+    /* submit news to the server to verify and then publish */
+    await fetch('/api/submit-news', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({headline: headlineText})
+    });
+
     setHeadlineText("");
     inputBox.focus();
   };
