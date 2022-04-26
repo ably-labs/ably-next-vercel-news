@@ -34,7 +34,6 @@ const AblyPubSub = () => {
   /* Process each message to retrieve the timestamp and author (client Id) */
   const HeadlinePreviews = ({items}) => {
     const previews = items.map((headline, index) => {
-      console.log(headline)
       const author =
         headline.clientId === ably.auth.clientId ? "(me)" : headline.clientId;
       return (
