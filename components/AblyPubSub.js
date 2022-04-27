@@ -16,8 +16,8 @@ const AblyPubSub = () => {
 
   /* Set the `rewind` parameter to retrieve up to ten historical 
   messages from the channel, if available */
-  const [channel, ably] = useChannel("[?rewind=10]news-list", (message) => {
-    updateHeadlines((prev) => [...prev, message]);
+  const [channel, ably] = useChannel("[?rewind=10]news-list", (headline) => {
+    updateHeadlines((prev) => [...prev, headline]);
   });
 
   const formatDate = (timestamp) => {
@@ -35,10 +35,10 @@ const AblyPubSub = () => {
   const HeadlinePreviews = ({items}) => {
     const previews = items.map((headline, index) => {
       const author =
-        headline.clientId === ably.auth.clientId ? "(me)" : headline.clientId;
+        headline.data.author === ably.auth.clientId ? "(me)" : headline.data.author;
       return (
         <li key={index}>
-          {headline.data}
+          {headline.data.text}
           {"     "}
           <span className={styles.timestamp}>{formatDate(headline.timestamp)}</span>{" "}
           <span className={styles.author}>{author}</span>
@@ -49,14 +49,17 @@ const AblyPubSub = () => {
     return <ul>{previews}</ul>;
   };
 
-  const sendNewHeadlineMessage = async (headlineText) => {
+  const sendNewHeadlineMessage = async () => {
     /* submit news to the server to verify and then publish */
     await fetch('/api/submit-news', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({headline: headlineText})
+      body: JSON.stringify({
+        text: headlineText,
+        author: ably.auth.clientId,
+      })
     });
 
     setHeadlineText("");
@@ -65,14 +68,14 @@ const AblyPubSub = () => {
 
   const handleFormSubmission = (event) => {
     event.preventDefault();
-    sendNewHeadlineMessage(headlineText);
+    sendNewHeadlineMessage();
   };
 
   const handleKeyPress = (event) => {
     if (event.charCode !== 13 || headlineTextIsEmpty) {
       return;
     }
-    sendNewHeadlineMessage(headlineText);
+    sendNewHeadlineMessage();
     event.preventDefault();
   };
 

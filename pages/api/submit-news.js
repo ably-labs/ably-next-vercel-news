@@ -4,9 +4,12 @@ const rest = new Ably.Rest(process.env.ABLY_API_KEY);
 
 var channel = rest.channels.get('news-list');
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     if (req.method === 'POST') {
-        channel.publish([{data: req.body.headline}]);
+        channel.publish('new-headline', {
+            text: req.body.text,
+            author: req.body.author,
+        });
     
         res.status(200).json({})
     }
