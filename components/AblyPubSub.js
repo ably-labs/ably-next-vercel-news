@@ -28,19 +28,21 @@ const AblyPubSub = () => {
     } else {
       formattedDate = date.format(dateToFormat, "ddd HH:mm:ss");
     }
-    return formattedDate
-  }
+    return formattedDate;
+  };
 
-  /* Process each message to retrieve the timestamp and author (client Id) */
-  const HeadlinePreviews = ({items}) => {
+  /* Process each message to retrieve the message, timestamp and author (client Id) */
+  const HeadlinePreviews = ({ items }) => {
     const previews = items.map((headline, index) => {
       const author =
-        headline.data.author === ably.auth.clientId ? "(me)" : headline.data.author;
+        headline.clientId === ably.auth.clientId ? "(me)" : headline.clientId;
       return (
         <li key={index}>
-          {headline.data.text}
+          {headline.data}
           {"     "}
-          <span className={styles.timestamp}>{formatDate(headline.timestamp)}</span>{" "}
+          <span className={styles.timestamp}>
+            {formatDate(headline.timestamp)}
+          </span>{" "}
           <span className={styles.author}>{author}</span>
         </li>
       );
