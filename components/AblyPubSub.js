@@ -49,19 +49,8 @@ const AblyPubSub = () => {
     return <ul>{previews}</ul>;
   };
 
-  const sendNewHeadlineMessage = async () => {
-    /* submit news to the server to verify and then publish */
-    await fetch('/api/submit-news', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        text: headlineText,
-        author: ably.auth.clientId,
-      })
-    });
-
+  const sendNewHeadlineMessage = () => {
+    channel.publish({ name: "news-list", data: headlineText });
     setHeadlineText("");
     inputBox.focus();
   };
