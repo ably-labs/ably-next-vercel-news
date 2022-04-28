@@ -20,6 +20,7 @@ const AblyPubSub = () => {
     updateHeadlines((prev) => [...prev, headline]);
   });
 
+  /* Format the message timestamp for display */
   const formatDate = (timestamp) => {
     const dateToFormat = new Date(timestamp);
     const formattedDate = "";
@@ -35,7 +36,9 @@ const AblyPubSub = () => {
   const HeadlinePreviews = ({ items }) => {
     const previews = items.map((headline, index) => {
       const author =
-        headline.clientId === ably.auth.clientId ? "(me)" : headline.clientId;
+        headline.clientId === ably.auth.clientId
+          ? `${headline.clientId} (me)`
+          : headline.clientId;
       return (
         <li key={index}>
           {headline.data}
@@ -51,6 +54,7 @@ const AblyPubSub = () => {
     return <ul>{previews}</ul>;
   };
 
+  /* Publish a new message */
   const sendNewHeadlineMessage = () => {
     channel.publish({ name: "news-list", data: headlineText });
     setHeadlineText("");

@@ -8,13 +8,9 @@ const AblyPresence = (props) => {
   const [presenceData] = usePresence("news-list");
 
   const presenceList = presenceData.map((member, index) => {
-    /* Is this member of the Presence set the current user? If so,
-    mark it as "(me)" */
-    const isItMe = member.clientId === props.clientId ? "(me)" : "";
     return (
       <li key={index}>
         <span className={styles.participant}>{member.clientId}</span>{" "}
-        <span className={styles.me}>{isItMe}</span>
       </li>
     );
   });
