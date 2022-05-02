@@ -10,7 +10,8 @@ const AblyPresence = (props) => {
   const presenceList = presenceData.map((member, index) => {
     /* Is this member of the Presence set the current user? If so,
     mark it as "(me)" */
-    const isItMe = member.clientId === props.clientId ? "(me)" : "";
+    console.log(props.user);
+    const isItMe = member.clientId === props.user.clientId ? "(me)" : "";
     return (
       <li key={index}>
         <span className={styles.participant}>{member.clientId}</span>{" "}
