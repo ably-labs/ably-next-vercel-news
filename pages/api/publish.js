@@ -1,13 +1,18 @@
-const Ably = require("ably");
+import Ably from "ably/promises";
+const Filter = require("bad-words");
 
 const rest = new Ably.Rest(process.env.ABLY_SERVER_API_KEY);
 
 var channel = rest.channels.get("news-list");
 
 export default async function handler(req, res) {
+  const filter = new Filter();
+  filter.addWords("pusher", "pubnub");
+  const cleanText = filter.clean(req.body.text);
+
   if (req.method === "POST") {
     channel.publish("new-headline", {
-      text: req.body.text,
+      text: cleanText,
       author: req.body.author,
     });
 
