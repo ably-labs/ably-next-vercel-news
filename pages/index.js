@@ -27,10 +27,7 @@ export default function Home(props) {
         <h3>Participants</h3>
         <Presence auth={props.auth} />
 
-        <div>
-          <h3>Headlines</h3>
-          <Headlines history={props.history} />
-        </div>
+        <Headlines history={props.history} />
       </main>
 
       <Footer />
@@ -38,7 +35,7 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const historicalMessages = await getHistoricalMessages();
   return {
     props: {

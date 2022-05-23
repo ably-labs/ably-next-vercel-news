@@ -5,7 +5,7 @@ const nextConfig = withTM({
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
-    domains: ["static.ably.dev"],
+    domains: ["static.ably.dev", "res.cloudinary.com"],
   },
 });
 

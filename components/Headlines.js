@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useChannel } from "@ably-labs/react-hooks";
 import styles from "../styles/Home.module.css";
-import date from "date-and-time";
+import Image from "next/image";
+import { formatDate } from "../lib/dates";
 
 /* Subscribes to headline messages from the "news-list" channel
 and provides a form to enter new headlines which it publishes to 
@@ -14,41 +15,60 @@ export default function Headlines(props) {
   const [headlines, updateHeadlines] = useState(props.history);
   const headlineTextIsEmpty = headlineText.trim().length === 0;
 
-  const [channel, ably] = useChannel("news-list", (headline) => {
+  const [channel, ably] = useChannel("headlines", (headline) => {
     updateHeadlines((prev) => [...prev, headline]);
   });
-
-  const formatDate = (timestamp) => {
-    const dateToFormat = new Date(timestamp);
-    const formattedDate = "";
-    if (dateToFormat.getDate() === new Date().getDate()) {
-      formattedDate = `Today ${date.format(dateToFormat, "HH:mm:ss")}`;
-    } else {
-      formattedDate = date.format(dateToFormat, "ddd HH:mm:ss");
-    }
-    return formattedDate;
-  };
 
   /* Process each message to retrieve the timestamp and author (client Id) */
   const HeadlinePreviews = ({ items }) => {
     const previews = items.map((headline, index) => {
-      const author =
-        headline.data.author === ably.auth.clientId
-          ? "(me)"
-          : headline.data.author;
+      let author = "";
+      const isMe = headline.data.author === ably.auth.clientId;
+      isMe ? (author = "me") : (author = headline.data.author);
+
       const timestamp =
         "timestamp" in headline ? formatDate(headline.timestamp) : "earlier";
+
+      // while history still full of old messages without urls
+      if (!headline.data.url) {
+        headline.data.url = "https://example.com";
+      }
+      if (!headline.data.image) {
+        headline.data.image = "http://placekitten.com/g/200/300";
+      }
+
+      const imgUrl = `https://res.cloudinary.com/mark-ably/image/fetch/w_200,h_200,c_fill/${headline.data.image}`;
+
       return (
-        <li key={index}>
-          {headline.data.text}
-          {"     "}
-          <span className={styles.timestamp}>{timestamp}</span>{" "}
-          <span className={styles.author}>{author}</span>
-        </li>
+        <div key={index} className={styles.card}>
+          <div className={styles.pic}>
+            <Image
+              src={imgUrl}
+              alt={headline.data.title}
+              width={200}
+              height={200}
+              objectFit="cover"
+              quality={80}
+            ></Image>
+          </div>
+
+          <div>
+            <a href={headline.data.url} className={styles.articleLink}>
+              {headline.data.title}
+            </a>
+            {"    "}
+            <div className={styles.postDetails}>
+              {"   "}({headline.data.site} - shared {timestamp} by {author})
+            </div>
+
+            {"    "}
+            <p>{headline.data.desc}</p>
+          </div>
+        </div>
       );
     });
 
-    return <ul>{previews}</ul>;
+    return <div>{previews}</div>;
   };
 
   const sendNewHeadlineMessage = async () => {
@@ -83,23 +103,14 @@ export default function Headlines(props) {
 
   return (
     <div>
-      <div>
-        <HeadlinePreviews items={headlines} />
-      </div>
-
-      <div
-        ref={(element) => {
-          messageEnd = element;
-        }}
-      ></div>
-      <form onSubmit={handleFormSubmission} className={styles.form}>
+      <form onSubmit={handleFormSubmission}>
         <input
           type="text"
           ref={(element) => {
             inputBox = element;
           }}
           value={headlineText}
-          placeholder="Type your headline..."
+          placeholder="Enter the URL for the news item you want to share..."
           onChange={(event) => setHeadlineText(event.target.value)}
           onKeyPress={handleKeyPress}
           className={styles.inputbox}
@@ -112,6 +123,13 @@ export default function Headlines(props) {
           Submit
         </button>
       </form>
+      <HeadlinePreviews items={headlines} />
+
+      <div
+        ref={(element) => {
+          messageEnd = element;
+        }}
+      ></div>
     </div>
   );
 }

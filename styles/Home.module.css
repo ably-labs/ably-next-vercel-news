@@ -8,22 +8,22 @@
   align-items: center;
 }
 
+
 .inputbox,
 .submitbutton {
-  display: inline-block;
   padding: 12px 20px;
   font-size:larger;
   border-radius: 4px;
 }
 
 .inputbox {
-  width: 500px;
+  width: 850px;
   outline: none;
   margin: 8px 0;
-
 }
 
 .submitbutton {
+  width: 100px;
   margin-left: 0.5em;
   background-color: red;
   color: white
@@ -34,15 +34,61 @@
   color: red;
 }
 
-.timestamp {
+.whenPosted {
   color: #888888;
 }
 
-.author,
 .me {
   color: red;
+}
+
+.postDetails {
+  color:#888888;
+  font-size: smaller;
+  font-style: italic;
+}
+
+.siteName {
+  color:#888888;
+  font-size: smaller;
 }
 
 .ablylogo {
   width: 160px;
 }
+
+.card {
+  display:flex;
+  column-gap: 2em;
+  border-style: dashed;
+  border-width: 1px;
+  border-color: red;
+}
+
+/* unvisited link */
+.articleLink:link {
+  color: red;
+  font-weight: bold;
+}
+
+/* visited link */
+.articleLink:visited {
+  color: red;
+}
+
+/* mouse over link */
+.articleLink:hover {
+  color: white;
+}
+
+/* selected link */
+.articleLink:active {
+  color: red;
+}
+
+.pic {
+  display: flex;
+  justify-content: center;
+  width:200px;
+}
+
