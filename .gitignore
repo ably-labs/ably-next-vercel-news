@@ -51,6 +51,9 @@ web_modules/
 # Optional npm cache directory
 .npm
 
+#linters
+.eslintrc.json
+
 # Optional eslint cache
 .eslintcache
 

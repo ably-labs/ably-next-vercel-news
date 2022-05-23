@@ -37,7 +37,7 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const historicalMessages = await getHistoricalMessages();
   return {
     props: {
