@@ -1,10 +1,11 @@
 import Ably from "ably/promises";
+import { generateRandomName } from "../../lib/randomNames";
 
 export default async function handler(req, res) {
-  console.log(process.env.ABLY_SERVER_API_KEY);
-  const client = new Ably.Realtime(process.env.ABLY_SERVER_API_KEY);
+  const client = new Ably.Realtime(process.env.ABLY_CLIENT_API_KEY);
+  const randomName = generateRandomName();
   const tokenRequestData = await client.auth.createTokenRequest({
-    clientId: "ably-nextjs-demo-server",
+    clientId: randomName,
   });
   res.status(200).json(tokenRequestData);
 }

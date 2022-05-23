@@ -7,7 +7,6 @@ var channel = rest.channels.get("news-list");
 
 export default async function handler(req, res) {
   const filter = new Filter();
-  filter.addWords("pusher", "pubnub");
   const cleanText = filter.clean(req.body.text);
 
   if (req.method === "POST") {

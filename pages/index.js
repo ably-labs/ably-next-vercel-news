@@ -1,15 +1,10 @@
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
 import { getHistoricalMessages } from "../lib/history";
-
-/* By default, NextJS renders everything server-side during the build process. We 
-need to tell it not to do that here so that our components can connect to Ably's APIs */
-const AblyNews = dynamic(() => import("../components/AblyNews"), {
-  ssr: false,
-});
+import Presence from "../components/Presence";
+import Headlines from "../components/Headlines";
 
 export default function Home(props) {
   return (
@@ -29,7 +24,13 @@ export default function Home(props) {
         ></Image>
         <h1>Realtime News</h1>
 
-        <AblyNews history={props.history} />
+        <h3>Participants</h3>
+        <Presence auth={props.auth} />
+
+        <div>
+          <h3>Headlines</h3>
+          <Headlines history={props.history} />
+        </div>
       </main>
 
       <Footer />
@@ -37,7 +38,7 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const historicalMessages = await getHistoricalMessages();
   return {
     props: {

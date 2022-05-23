@@ -6,7 +6,7 @@ import date from "date-and-time";
 /* Subscribes to headline messages from the "news-list" channel
 and provides a form to enter new headlines which it publishes to 
 the same channel */
-export default function AblyPubSub(props) {
+export default function Headlines(props) {
   let inputBox = null;
   let messageEnd = null;
 
