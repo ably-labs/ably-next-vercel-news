@@ -2,11 +2,13 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Footer from "../components/Footer";
-import { getHistoricalMessages } from "../lib/history";
-import Presence from "../components/Presence";
-import Headlines from "../components/Headlines";
+import Participants from "../components/Participants";
+import Articles from "../components/Articles";
+import { configureAbly } from "@ably-labs/react-hooks";
 
-export default function Home(props) {
+configureAbly({ authUrl: `${process.env.NEXT_PUBLIC_HOSTNAME}/api/createTokenRequest` });
+
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -16,30 +18,15 @@ export default function Home(props) {
       </Head>
 
       <main className={styles.main}>
-        <Image
-          alt="ably logo"
-          src="https://static.ably.dev/motif-red.svg?lorem-ipsum"
-          width="160px"
-          height="100%"
-        ></Image>
+        <Image alt="ably logo" src="https://static.ably.dev/motif-red.svg?lorem-ipsum" width="160px" height="100%"></Image>
         <h1>Realtime News</h1>
-
+        <h2>Share your favorite news articles</h2>
         <h3>Participants</h3>
-        <Presence auth={props.auth} />
-
-        <Headlines history={props.history} />
+        <Participants />
+        <Articles />
       </main>
 
       <Footer />
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  const historicalMessages = await getHistoricalMessages();
-  return {
-    props: {
-      history: historicalMessages,
-    },
-  };
 }

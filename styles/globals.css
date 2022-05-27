@@ -7,6 +7,12 @@ body {
   font-family: 'Poppins', sans-serif;
   background: black;
   color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
@@ -14,6 +20,10 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+p {
+  line-height: 1.4em;
+}
+
+h3 {
+  margin-bottom: 0;
 }
