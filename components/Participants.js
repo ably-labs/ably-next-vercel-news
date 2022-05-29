@@ -17,5 +17,5 @@ export default function Participants(props) {
     );
   });
 
-  return <div>{presenceList}</div>;
+  return <ul>{presenceList}</ul>;
 };

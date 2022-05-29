@@ -24,6 +24,10 @@ p {
   line-height: 1.4em;
 }
 
+ul {
+  padding: 0;
+}
+
 h3 {
   margin-bottom: 0;
 }
