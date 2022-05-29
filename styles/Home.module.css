@@ -14,10 +14,10 @@
 
 .submit {
   padding: 10px 1em;
-  font-size: larger;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border: 0;
+  font-size: larger;
   cursor: pointer;
   color: white;
   background-color: red;
