@@ -1,56 +1,53 @@
 .main {
+  max-width: 900px;
   min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.form {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 1em 0;
 }
 
-
-.inputbox,
-.submitbutton {
-  padding: 12px 20px;
-  font-size:larger;
-  border-radius: 4px;
-}
-
-.inputbox {
-  width: 850px;
-  outline: none;
-  margin: 8px 0;
-}
-
-.submitbutton {
-  width: 100px;
-  margin-left: 0.5em;
+.submit {
+  padding: 10px 1em;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 0;
+  font-size: larger;
+  cursor: pointer;
+  color: white;
   background-color: red;
-  color: white
 }
 
-.submitbutton:hover {
-  background-color: white;
-  color: red;
+.input {
+  width: 100%;
+  padding: 0 1em;
+  border: 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: larger;
 }
 
-.whenPosted {
-  color: #888888;
+.submit:hover {
+  background-color: #ff5215;
 }
 
 .me {
   color: red;
 }
 
-.postDetails {
-  color:#888888;
-  font-size: smaller;
-  font-style: italic;
+.me::before {
+  content:" ";
 }
 
-.siteName {
-  color:#888888;
+.details {
   font-size: smaller;
+  font-style: italic;
+  color: #888888;
 }
 
 .ablylogo {
@@ -58,37 +55,42 @@
 }
 
 .card {
-  display:flex;
-  column-gap: 2em;
-  border-style: dashed;
-  border-width: 1px;
-  border-color: red;
+  display: grid;
+  grid-template-columns: 200px auto;
+  gap: 1em;
+  max-width: 960px;
+  margin-bottom: 1em;
+  border: 1px dashed red;
 }
 
-/* unvisited link */
-.articleLink:link {
+.info {
+  margin-right: 1em;
+}
+
+.title {
+  margin-bottom: 0;
+  font-size: medium;
+}
+
+.link {
   color: red;
-  font-weight: bold;
 }
 
-/* visited link */
-.articleLink:visited {
-  color: red;
-}
-
-/* mouse over link */
-.articleLink:hover {
+.link:hover {
   color: white;
 }
 
-/* selected link */
-.articleLink:active {
-  color: red;
-}
-
 .pic {
-  display: flex;
-  justify-content: center;
-  width:200px;
+  flex-shrink:  0;
+  min-width: 200px;
+  background-color: #888888;
 }
 
+.participant {
+  line-height: 1.6em;
+  list-style: none;
+}
+
+.participant::before {
+  content: "👤 ";
+}
