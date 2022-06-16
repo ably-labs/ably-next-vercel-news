@@ -11,7 +11,7 @@ It demonstrates use of:
 - Channel rewind
 - OpenGraph
 
-You can test it out by visiting the [Vercel deployment](https://ably-next-vercel-news.vercel.app/) in multiple pages.
+You can test it out by visiting the [Vercel deployment](https://ably-next-headlines.vercel.app/) in multiple tabs.
 
 ---
 
