@@ -1,17 +1,16 @@
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import Image from "next/image";
+import ablyLogo from "../public/ably-logo.svg";
 import styles from "../styles/Home.module.css";
-import Footer from "../components/Footer";
+import Participants from "../components/Participants";
+import { configureAbly } from "@ably-labs/react-hooks";
+import Articles from "../components/Articles";
 
-/* By default, NextJS renders everything server-side during the build process. We 
-need to tell it not to do that here so that our components can connect to Ably's APIs */
-const AblyNewsComponent = dynamic(
-  () => import("../components/AblyNewsComponent"),
-  { ssr: false }
-);
+configureAbly({
+  authUrl: `${process.env.NEXT_PUBLIC_HOSTNAME}/api/createTokenRequest`,
+});
 
-export default function Home(props) {
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -23,24 +22,16 @@ export default function Home(props) {
       <main className={styles.main}>
         <Image
           alt="ably logo"
-          src="https://static.ably.dev/motif-red.svg?lorem-ipsum"
+          src={ablyLogo}
           width="160px"
           height="100%"
         ></Image>
         <h1>Realtime News</h1>
-
-        <AblyNewsComponent apiKey={props.ablyApiKey} />
+        <h2>Share your favorite news articles</h2>
+        <h3>Participants</h3>
+        <Participants />
+        <Articles />
       </main>
-
-      <Footer />
     </div>
   );
 }
-
-export const getServerSideProps = () => {
-  return {
-    props: {
-      ablyApiKey: process.env.ABLY_API_KEY,
-    },
-  };
-};

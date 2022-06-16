@@ -1,4 +1,4 @@
-# Building a Collaborative News App with Ably, NextJS, and Vercel
+# Build a Social Link-Sharing App with Ably, NextJS, and OpenGraph
 
 > **Note**: This README (and the demo app generally) is a work in progress. Instructions for running this repo locally are listed in the [Building & running locally](#building--running-locally) section below. Everything else will be populated before the tutorial goes live.
 
@@ -8,7 +8,8 @@ It demonstrates use of:
 
 - Pub/sub messaging
 - Channel presence
-- History
+- Channel rewind
+- OpenGraph
 
 You can test it out by visiting the [Vercel deployment](https://ably-next-vercel-news.vercel.app/) in multiple pages.
 
