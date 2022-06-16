@@ -1,5 +1,5 @@
 {
-  "name": "ably-next-vercel-news",
+  "name": "next-blog-test-1",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,15 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ably-labs/react-hooks": "^1.1.5",
+    "@ably-labs/react-hooks": "^2.0.1",
+    "ably": "^1.2.25",
     "date-and-time": "^2.3.1",
-    "next": "12.1.5",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
-    "unique-names-generator": "^4.7.1"
+    "next": "12.1.6",
+    "next-transpile-modules": "^9.0.0",
+    "open-graph-scraper": "^4.11.0",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "unique-names-generator": "^4.7.1",
+    "url-exists-nodejs": "^0.2.3"
   },
   "devDependencies": {
-    "eslint": "8.13.0",
-    "eslint-config-next": "12.1.5"
+    "eslint": "8.17.0",
+    "eslint-config-next": "12.1.6"
   }
 }
