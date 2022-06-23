@@ -4,7 +4,7 @@ const withTM = require("next-transpile-modules")(["@ably-labs/react-hooks"]);
 const nextConfig = withTM({
   reactStrictMode: true,
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ["static.ably.dev", "res.cloudinary.com"],
   },
   async headers() {
     return [
