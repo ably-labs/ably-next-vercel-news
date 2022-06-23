@@ -11,7 +11,6 @@
   "dependencies": {
     "@ably-labs/react-hooks": "^2.0.1",
     "ably": "^1.2.25",
-    "date-and-time": "^2.3.1",
     "next": "12.1.6",
     "next-transpile-modules": "^9.0.0",
     "open-graph-scraper": "^4.11.0",

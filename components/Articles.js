@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useChannel } from "@ably-labs/react-hooks";
-import { formatDate } from "../lib/dates";
 import ArticlePreview from "./ArticlePreview";
 import styles from "../styles/Home.module.css";
 
@@ -76,4 +75,11 @@ function processMessage(headline, currentClientId) {
   headline.data.image =
     headline?.data?.image || "http://placekitten.com/g/200/300";
   return headline;
+}
+
+function formatDate(date) {
+  const regex = /(?:[^T]+)T([0-9:]+)/gm;
+  const dateToFormat = new Date(date).toISOString();
+  const match = regex.exec(dateToFormat);
+  return match[1];
 }
