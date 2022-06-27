@@ -5,12 +5,13 @@ import styles from "../styles/Home.module.css";
 import Participants from "../components/Participants";
 import { configureAbly } from "@ably-labs/react-hooks";
 import Articles from "../components/Articles";
+import { getHistoricalMessages } from "../lib/history";
 
 configureAbly({
   authUrl: `${process.env.NEXT_PUBLIC_HOSTNAME}/api/createTokenRequest`,
 });
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -34,8 +35,20 @@ export default function Home() {
         <h2>Share your favorite news articles</h2>
         <h3>Participants</h3>
         <Participants />
-        <Articles />
+        <Articles history={props.history} />
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const historicalMessages = await getHistoricalMessages();
+
+  return {
+    props: {
+      history: historicalMessages,
+    },
+    //enable ISR
+    revalidate: 10,
+  };
 }
