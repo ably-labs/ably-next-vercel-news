@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const withTM = require("next-transpile-modules")(["@ably-labs/react-hooks"]);
-const nextConfig = withTM({
+const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["static.ably.dev", "res.cloudinary.com"],
@@ -27,6 +26,6 @@ const nextConfig = withTM({
       },
     ];
   },
-});
+};
 
 module.exports = nextConfig;
