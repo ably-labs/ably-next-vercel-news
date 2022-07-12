@@ -3,15 +3,25 @@ import { useChannel } from "@ably-labs/react-hooks";
 import ArticlePreview from "./ArticlePreview";
 import styles from "../styles/Home.module.css";
 
+let clearHistoryState = true;
+
 export default function Articles(props) {
   let inputBox = null;
 
   const [headlineText, setHeadlineText] = useState("");
   const [headlines, updateHeadlines] = useState(props.history);
-  const [_, ably] = useChannel("headlines", (headline) => {
+  const [_, ably] = useChannel("[?rewind=5]headlines", (headline) => {
+    if (clearHistoryState) {
+      resetHeadlines();
+      clearHistoryState = false;
+    }
+
     updateHeadlines((prev) => [headline, ...prev]);
   });
 
+  const resetHeadlines = () => {
+    updateHeadlines([]);
+  };
   const headlineTextIsEmpty = headlineText.trim().length === 0;
 
   const processedHeadlines = headlines.map((headline) =>
