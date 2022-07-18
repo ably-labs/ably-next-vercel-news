@@ -3,15 +3,31 @@ import { useChannel } from "@ably-labs/react-hooks";
 import ArticlePreview from "./ArticlePreview";
 import styles from "../styles/Home.module.css";
 
-export default function Articles() {
+/* 
+clearHistoryState:
+  - When true, historical messages are retrieved and rendered statically from the History API.
+  - When false, historical messages are retrieved using channel rewind to prevent a race condition
+    where new messages are arriving on the channel while history is still being retrieved.
+*/
+let clearHistoryState = true;
+
+export default function Articles(props) {
   let inputBox = null;
 
   const [headlineText, setHeadlineText] = useState("");
-  const [headlines, updateHeadlines] = useState([]);
-  const [_, ably] = useChannel("[?rewind=3]headlines", (headline) => {
-    updateHeadlines((prev) => [...prev, headline]);
+  const [headlines, updateHeadlines] = useState(props.history);
+  const [_, ably] = useChannel("[?rewind=5]headlines", (headline) => {
+    if (clearHistoryState) {
+      resetHeadlines();
+      clearHistoryState = false;
+    }
+
+    updateHeadlines((prev) => [headline, ...prev]);
   });
 
+  const resetHeadlines = () => {
+    updateHeadlines([]);
+  };
   const headlineTextIsEmpty = headlineText.trim().length === 0;
 
   const processedHeadlines = headlines.map((headline) =>
