@@ -77,7 +77,7 @@ export default function Articles(props) {
           Submit
         </button>
       </form>
-      {articles}
+      <div>{articles}</div>
     </div>
   );
 }
