@@ -83,8 +83,8 @@ export default function Articles(props) {
 }
 
 function processMessage(headline, currentClientId) {
-  headline.data.author =
-    headline.data.author === currentClientId ? "me" : headline.data.author;
+  /*headline.data.author =
+    headline.data.author === currentClientId ? "me" : headline.data.author;*/
   headline.data.timestamp =
     "timestamp" in headline ? formatDate(headline.timestamp) : "earlier";
   headline.data.url = headline?.data?.url || "http://example.com";
