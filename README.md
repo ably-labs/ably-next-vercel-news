@@ -2,8 +2,6 @@
 
 This is a demo app using [NextJS](https://nextjs.org/) and [Ably](https://ably.com) with the Ably's [react-hooks](https://github.com/ably-labs/react-hooks) `npm` module.
 
-You can test it out by visiting the [live deployment](https://ably-next-headlines-live.vercel.app/) in multiple tabs.
-
 ## Description
 
 It demonstrates use of:
