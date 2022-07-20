@@ -3,15 +3,14 @@ import { useChannel } from "@ably-labs/react-hooks";
 import ArticlePreview from "./ArticlePreview";
 import styles from "../styles/Home.module.css";
 
-/* 
-clearHistoryState:
-  - When true, historical messages are retrieved and rendered statically from the History API.
-  - When false, historical messages are retrieved using channel rewind to prevent a race condition
-    where new messages are arriving on the channel while history is still being retrieved.
-*/
-let clearHistoryState = true;
-
 export default function Articles(props) {
+  /* 
+  clearHistoryState:
+    - When true, historical messages are retrieved and rendered statically from the History API.
+    - When false, historical messages are retrieved using channel rewind to prevent a race condition
+      where new messages are arriving on the channel while history is still being retrieved.
+  */
+  let clearHistoryState = true;
   let inputBox = null;
 
   const [headlineText, setHeadlineText] = useState("");
