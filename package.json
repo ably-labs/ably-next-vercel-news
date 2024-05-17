@@ -11,7 +11,7 @@
     "format:check": "prettier --check --ignore-path .gitignore components lib pages styles next.config.js"
   },
   "dependencies": {
-    "ably": "^1.2.25",
+    "ably": "^2.0.4",
     "next": "12.1.6",
     "open-graph-scraper": "^4.11.0",
     "react": "18.1.0",
