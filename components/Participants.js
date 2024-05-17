@@ -1,10 +1,11 @@
 import React from 'react';
-import { usePresence, assertConfiguration } from '@ably-labs/react-hooks';
+import { usePresence, usePresenceListener, useAbly } from 'ably/react';
 import styles from '../styles/Home.module.css';
 
 export default function Participants(props) {
-  const ably = assertConfiguration();
-  const [presenceData] = usePresence('headlines');
+  const ably = useAbly();
+  usePresence('headlines');
+  const { presenceData } = usePresenceListener('headlines');
 
   const presenceList = presenceData.map((member, index) => {
     const isItMe = member.clientId === ably.auth.clientId ? '(me)' : '';
