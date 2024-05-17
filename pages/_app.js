@@ -1,6 +1,10 @@
 import '../styles/globals.css';
 import * as Ably from 'ably';
-import { AblyProvider, ChannelProvider } from 'ably/react';
+import { AblyProvider } from 'ably/react';
+import dynamic from 'next/dynamic';
+
+// fixes "Warning: useLayoutEffect does nothing on the server" warning spam from next.js
+const ChannelProvider = dynamic(() => import('ably/react').then((module) => module.ChannelProvider), { ssr: false });
 
 export default function App({ Component, pageProps }) {
   const client = new Ably.Realtime({
