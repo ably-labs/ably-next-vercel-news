@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useChannel } from "@ably-labs/react-hooks";
-import ArticlePreview from "./ArticlePreview";
-import styles from "../styles/Home.module.css";
+import React, { useState } from 'react';
+import { useChannel } from '@ably-labs/react-hooks';
+import ArticlePreview from './ArticlePreview';
+import styles from '../styles/Home.module.css';
 
 /* 
 clearHistoryState:
@@ -14,9 +14,9 @@ let clearHistoryState = true;
 export default function Articles(props) {
   let inputBox = null;
 
-  const [headlineText, setHeadlineText] = useState("");
+  const [headlineText, setHeadlineText] = useState('');
   const [headlines, updateHeadlines] = useState(props.history);
-  const [_, ably] = useChannel("[?rewind=5]headlines", (headline) => {
+  const [_, ably] = useChannel('[?rewind=5]headlines', (headline) => {
     if (clearHistoryState) {
       resetHeadlines();
       clearHistoryState = false;
@@ -30,12 +30,8 @@ export default function Articles(props) {
   };
   const headlineTextIsEmpty = headlineText.trim().length === 0;
 
-  const processedHeadlines = headlines.map((headline) =>
-    processMessage(headline, ably.auth.clientId)
-  );
-  const articles = processedHeadlines.map((headline, index) => (
-    <ArticlePreview key={index} headline={headline} />
-  ));
+  const processedHeadlines = headlines.map((headline) => processMessage(headline, ably.auth.clientId));
+  const articles = processedHeadlines.map((headline, index) => <ArticlePreview key={index} headline={headline} />);
 
   const handleFormSubmission = async (event) => {
     const nonEnterKeyPress = event.charCode && event.charCode !== 13;
@@ -45,13 +41,13 @@ export default function Articles(props) {
 
     event.preventDefault();
 
-    await fetch("/api/publish", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    await fetch('/api/publish', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: headlineText, author: ably.auth.clientId }),
     });
 
-    setHeadlineText("");
+    setHeadlineText('');
     inputBox?.focus();
   };
 
@@ -69,11 +65,7 @@ export default function Articles(props) {
           onKeyPress={handleFormSubmission}
           className={styles.input}
         />
-        <button
-          type="submit"
-          className={styles.submit}
-          disabled={headlineTextIsEmpty}
-        >
+        <button type="submit" className={styles.submit} disabled={headlineTextIsEmpty}>
           Submit
         </button>
       </form>
@@ -85,11 +77,9 @@ export default function Articles(props) {
 function processMessage(headline, currentClientId) {
   /*headline.data.author =
     headline.data.author === currentClientId ? "me" : headline.data.author;*/
-  headline.data.timestamp =
-    "timestamp" in headline ? formatDate(headline.timestamp) : "earlier";
-  headline.data.url = headline?.data?.url || "http://example.com";
-  headline.data.image =
-    headline?.data?.image || "http://placekitten.com/g/200/300";
+  headline.data.timestamp = 'timestamp' in headline ? formatDate(headline.timestamp) : 'earlier';
+  headline.data.url = headline?.data?.url || 'http://example.com';
+  headline.data.image = headline?.data?.image || 'http://placekitten.com/g/200/300';
   return headline;
 }
 
