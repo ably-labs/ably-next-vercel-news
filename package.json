@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write --ignore-path .gitignore components lib pages styles next.config.js",
+    "format:check": "prettier --check --ignore-path .gitignore components lib pages styles next.config.js"
   },
   "dependencies": {
     "@ably-labs/react-hooks": "^2.0.4",
