@@ -41,7 +41,7 @@
 }
 
 .me::before {
-  content:" ";
+  content: ' ';
 }
 
 .details {
@@ -81,7 +81,7 @@
 }
 
 .pic {
-  flex-shrink:  0;
+  flex-shrink: 0;
   min-width: 200px;
   background-color: #888888;
 }
@@ -92,5 +92,5 @@
 }
 
 .participant::before {
-  content: "👤 ";
+  content: '👤 ';
 }

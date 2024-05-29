@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "../styles/Home.module.css";
-import Image from "next/image";
+import React from 'react';
+import styles from '../styles/Home.module.css';
+import Image from 'next/image';
 
 export default function ArticlePreview({ index, headline }) {
   return (
@@ -22,8 +22,7 @@ export default function ArticlePreview({ index, headline }) {
           </a>
         </h1>
         <div className={styles.details}>
-          {headline.data.site} - shared {headline.data.timestamp} by{" "}
-          {headline.data.author}
+          {headline.data.site} - shared {headline.data.timestamp} by {headline.data.author}
         </div>
         <p>{headline.data.desc}</p>
       </div>
