@@ -3,13 +3,8 @@ import Image from 'next/image';
 import ablyLogo from '../public/ably-logo.svg';
 import styles from '../styles/Home.module.css';
 import Participants from '../components/Participants';
-import { configureAbly } from '@ably-labs/react-hooks';
 import Articles from '../components/Articles';
 import { getHistoricalMessages } from '../lib/history';
-
-configureAbly({
-  authUrl: `${process.env.NEXT_PUBLIC_HOSTNAME}/api/createTokenRequest`,
-});
 
 export default function Home(props) {
   return (

@@ -1,13 +1,15 @@
-import Ably from 'ably/promises';
+import Ably from 'ably';
 import urlExists from 'url-exists-nodejs';
 import ogs from 'open-graph-scraper';
-
-const ably = new Ably.Rest(process.env.ABLY_SERVER_API_KEY);
-const channel = ably.channels.get('headlines');
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({});
+    return;
+  }
+
+  if (typeof req.body?.text !== 'string') {
+    res.status(400).json({ url: req.body?.text, message: 'not a valid URL' });
     return;
   }
 
@@ -24,7 +26,10 @@ export default async function handler(req, res) {
     return;
   }
 
-  channel.publish('new-headline', {
+  const ably = new Ably.Rest(process.env.ABLY_SERVER_API_KEY);
+  const channel = ably.channels.get('headlines');
+
+  await channel.publish('new-headline', {
     author: req.body.author,
     site: result?.ogSiteName || 'unknown',
     title: result?.ogTitle || 'unknown',
